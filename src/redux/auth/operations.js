@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const contactsApi = axios.create({
   baseURL: 'https://connections-api.herokuapp.com/docs/',
@@ -14,40 +15,48 @@ const clearToken = () => {
 
 export const registerThunk = createAsyncThunk(
   'register',
-  async (credentials, thunkApi) => {
+  async (credentials, { rejectWithValue }) => {
     try {
       const { data } = contactsApi.post('users/signup', credentials);
       return data;
     } catch (error) {
-      thunkApi.rejectWithValue(error.message);
+      rejectWithValue(error.message);
     }
   }
 );
 
 export const loginThunk = createAsyncThunk(
   'login',
-  async (credentials, thunkApi) => {
+  async (credentials, { rejectWithValue }) => {
     try {
       const { data } = contactsApi.post('users/login', credentials);
       return data;
     } catch (error) {
-      thunkApi.rejectWithValue(error.message);
+      rejectWithValue(error.message);
     }
   }
 );
 
-export const logoutThunk = createAsyncThunk('logout', async (_, thunkApi) => {
-  try {
-    await contactsApi.post('users/signup');
-  } catch (error) {
-    thunkApi.rejectWithValue(error.message);
+export const logoutThunk = createAsyncThunk(
+  'logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      await contactsApi.post('users/signup');
+    } catch (error) {
+      rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const refreshThunk = createAsyncThunk(
   'refresh',
-  async (credentials, thunkApi) => {
-    setToken();
+  async (credentials, { rejectWithValue, getState }) => {
+    const savedToken = getState().userAuth.token;
+    setToken(savedToken);
+    if (!savedToken) {
+      toast.warning('token was not found');
+      return rejectWithValue('token was not found');
+    }
     try {
     } catch (error) {}
   }
