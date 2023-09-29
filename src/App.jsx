@@ -1,5 +1,7 @@
+import { PrivateRoute } from 'Routes/PrivateRoute';
 import Layout from 'components/Layout';
-import PhoneBook from 'components/PhoneBook';
+import Contacts from 'pages/Contacts';
+import Home from 'pages/Home';
 import Login from 'pages/Login';
 import NotFound from 'pages/NotFound';
 import Register from 'pages/Register';
@@ -11,7 +13,16 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<PhoneBook />} />
+          <Route index element={<Home />} />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute>
+                <Contacts />
+              </PrivateRoute>
+            }
+          />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>

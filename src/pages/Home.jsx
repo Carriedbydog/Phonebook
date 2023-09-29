@@ -1,7 +1,12 @@
 import React from 'react';
+import Contacts from './Contacts';
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <Contacts />
+    </>
+  );
 };
 
 export default Home;

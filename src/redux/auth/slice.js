@@ -18,7 +18,7 @@ const initialState = {
   isRefresh: false,
 };
 export const slice = createSlice({
-  name: 'userAuth',
+  name: 'auth',
   initialState,
   extraReducers: builder => {
     builder
@@ -38,25 +38,20 @@ export const slice = createSlice({
         state.token = payload.token;
       })
       .addMatcher(
-        isAnyOf(
-          loginThunk.pending,
-          registerThunk.pending,
-          (state, { payload }) => {
-            state.loading = true;
-          }
-        )
+        isAnyOf(loginThunk.pending, registerThunk.pending, state => {
+          state.loading = true;
+        })
       )
       .addMatcher(
-        isAnyOf(
-          loginThunk.fulfilled,
-          registerThunk.fulfilled,
-          (state, { payload }) => {
-            state.user = payload.user;
-            state.token = payload.token;
-            state.loading = false;
-            state.isLoggedIn = true;
-          }
-        )
+        isAnyOf(loginThunk.fulfilled, registerThunk.fulfilled),
+        (state, action) => {
+          state.user = action.payload.user;
+          state.token = action.payload.token;
+          state.loading = false;
+          state.isLoggedIn = true;
+        }
       );
   },
 });
+
+export const authReducer = slice.reducer;

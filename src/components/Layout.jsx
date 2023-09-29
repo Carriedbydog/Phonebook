@@ -2,8 +2,11 @@ import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import UserMenu from './UserMenu/UserMenu';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from 'redux/auth/selectors';
 
 const Layout = () => {
+  const isLogin = useSelector(selectIsLoggedIn);
   return (
     <div>
       <StyledNavList>
@@ -11,14 +14,21 @@ const Layout = () => {
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
-          <li>
-            <NavLink to="/register">Register</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
+          {!isLogin ? (
+            <>
+              <li>
+                <NavLink to="/register">Register</NavLink>
+              </li>
+              <li>
+                <NavLink to="/login">Login</NavLink>
+              </li>
+            </>
+          ) : (
+            <StyledUserMenuLayout>
+              <UserMenu />
+            </StyledUserMenuLayout>
+          )}
         </ListLinks>
-        <UserMenu />
       </StyledNavList>
       <hr />
       <div>
@@ -41,4 +51,9 @@ const ListLinks = styled.ul`
   display: flex;
   gap: 20px;
   list-style: none;
+`;
+
+const StyledUserMenuLayout = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 export const contactsApi = axios.create({
-  baseURL: 'https://connections-api.herokuapp.com/docs/',
+  baseURL: 'https://connections-api.herokuapp.com',
 });
 
 const setToken = token => {
@@ -17,10 +17,11 @@ export const registerThunk = createAsyncThunk(
   'register',
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = contactsApi.post('users/signup', credentials);
+      const { data } = await contactsApi.post('/users/signup', credentials);
+      setToken(data.token);
       return data;
     } catch (error) {
-      rejectWithValue(error.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -29,10 +30,11 @@ export const loginThunk = createAsyncThunk(
   'login',
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = contactsApi.post('users/login', credentials);
+      const { data } = await contactsApi.post('/users/login', credentials);
+      setToken(data.token);
       return data;
     } catch (error) {
-      rejectWithValue(error.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -41,23 +43,28 @@ export const logoutThunk = createAsyncThunk(
   'logout',
   async (_, { rejectWithValue }) => {
     try {
-      await contactsApi.post('users/signup');
+      await contactsApi.post('/users/logout');
+      clearToken();
     } catch (error) {
-      rejectWithValue(error.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
 export const refreshThunk = createAsyncThunk(
   'refresh',
-  async (credentials, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue, getState }) => {
     const savedToken = getState().userAuth.token;
-    setToken(savedToken);
     if (!savedToken) {
       toast.warning('token was not found');
       return rejectWithValue('token was not found');
     }
     try {
-    } catch (error) {}
+      setToken(savedToken);
+      const { data } = await contactsApi.get('/users/current');
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
