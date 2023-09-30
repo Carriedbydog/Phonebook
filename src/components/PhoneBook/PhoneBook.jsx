@@ -1,8 +1,7 @@
-import { ContactList } from './Contacts/ContactList';
-import { Filter } from './Filter/Filter';
+import { ContactList } from '../Contacts/ContactList';
+import { Filter } from '../Filter/Filter';
 import { nanoid } from 'nanoid';
-import { StyledSubTitle, StyledTitle, StyledWrapper } from 'styles/App.styled';
-import { Form } from './ContactForm/Form';
+import { Form } from '../ContactForm/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from 'redux/phonebook/slice';
 import { selectContacts, selectFilter } from 'redux/selectors';
@@ -11,6 +10,7 @@ import {
   fetchContactsThunk,
 } from 'redux/phonebook/operations';
 import { useEffect } from 'react';
+import { StyledSubTitle, StyledTitle, StyledWrapper } from './PhoneBookStyled';
 
 const App = () => {
   const dispatch = useDispatch();

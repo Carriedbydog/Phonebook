@@ -13,7 +13,6 @@ const initialState = {
   },
   token: '',
   isLoggedIn: false,
-  error: '',
   loading: false,
   isRefresh: false,
 };
@@ -28,10 +27,10 @@ export const slice = createSlice({
       .addCase(refreshThunk.pending, (state, { payload }) => {
         state.isRefresh = true;
       })
-      .addCase(refreshThunk.fulfilled, (state, { payload }) => {
+      .addCase(refreshThunk.rejected, (state, { payload }) => {
         state.isRefresh = false;
       })
-      .addCase(refreshThunk.rejected, (state, { payload }) => {
+      .addCase(refreshThunk.fulfilled, (state, { payload }) => {
         state.isRefresh = false;
         state.isLoggedIn = true;
         state.user = payload.user;

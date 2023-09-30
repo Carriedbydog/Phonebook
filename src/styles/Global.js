@@ -4,6 +4,8 @@ export const Global = createGlobalStyle`
 
 body {
     background-color: whitesmoke;
+    overflow: hidden;
+  
 
 }
 
@@ -13,6 +15,7 @@ h3,
 h4,
 h5,
 h6,
+hr,
 p {
   margin: 0;
 }

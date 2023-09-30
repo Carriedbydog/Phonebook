@@ -54,7 +54,7 @@ export const logoutThunk = createAsyncThunk(
 export const refreshThunk = createAsyncThunk(
   'refresh',
   async (_, { rejectWithValue, getState }) => {
-    const savedToken = getState().userAuth.token;
+    const savedToken = getState().auth.token;
     if (!savedToken) {
       toast.warning('token was not found');
       return rejectWithValue('token was not found');
