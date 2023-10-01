@@ -30,7 +30,7 @@ const Login = () => {
     return <Navigate to="/contacts" />;
   }
   return (
-    <section className="grid h-14 bg-gradient-to-r from-violet-500 to-fuchsia-500 min-h-screen justify-center items-center">
+    <section className="grid h-14 bg-gradient-to-r from-violet-500 to-fuchsia-500 min-h-screen justify-center items-center p-4">
       <form
         className="grid gap-2 bg-white  px-4 py-4 shadow-2xl rounded-lg"
         onSubmit={handleSubmit(submit)}

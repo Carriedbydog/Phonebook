@@ -10,7 +10,7 @@ const UserMenu = () => {
     dispatch(logoutThunk());
   };
   return (
-    <div className="flex justify-center items-center gap-3">
+    <div className="hidden lg:flex justify-center items-center gap-3">
       {user?.name && <p className="text-2xl">{user.name} | </p>}
       <button
         className="p-4 font-semibold rounded-xl text-white bg-blue-500 hover:bg-blue-700"

@@ -49,8 +49,8 @@ const App = () => {
   };
 
   return (
-    <div className="h-14 bg-gradient-to-r from-violet-500 to-fuchsia-500 min-h-screen flex justify-center items-center">
-      <div className="rounded-xl p-6 bg-red-100 ">
+    <div className="h-14 bg-gradient-to-r from-violet-500 to-fuchsia-500 min-h-screen flex justify-center items-center shadow-2xl p-5 ">
+      <div className="rounded-xl p-6 mx-auto bg-red-100 ">
         <h1 className="text-4xl items-center justify-center flex mb-4 font-bold">
           PhoneBook
         </h1>

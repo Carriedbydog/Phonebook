@@ -17,7 +17,7 @@ export const Form = ({ handleAddContact }) => {
     setNumber('');
   };
   return (
-    <form className="flex " onSubmit={handleFormSubmit}>
+    <form className="grid gap-5 sm:flex" onSubmit={handleFormSubmit}>
       <label className="font-semibold text-2xl">
         Name:
         <input

@@ -14,7 +14,7 @@ export const ContactList = ({ contacts }) => {
   return (
     <div>
       {loading && <h1>Loading...</h1>}
-      {error && <h1>Something went wrong..</h1>}
+      {error && <h1 className="text-xl">Something went wrong...😢</h1>}
       <ol className="flex flex-col justify-between gap-6 list-decimal">
         {contacts.map(contact => (
           <li
