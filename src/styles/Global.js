@@ -4,7 +4,7 @@ export const Global = createGlobalStyle`
 
 body {
     background-color: whitesmoke;
-    overflow: hidden;
+    
   
 
 }

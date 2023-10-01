@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { StyledButton, StyledInput, StyledLabel } from './Form.styled';
+import ButtonLoad from 'components/ButtonLoad/ButtonLoad';
+import { useSelector } from 'react-redux';
+import { selectLoading } from 'redux/selectors';
 
 export const Form = ({ handleAddContact }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const isLoading = useSelector(selectLoading);
 
   const handleFormSubmit = e => {
     e.preventDefault();
@@ -14,10 +17,11 @@ export const Form = ({ handleAddContact }) => {
     setNumber('');
   };
   return (
-    <form onSubmit={handleFormSubmit}>
-      <StyledLabel>
+    <form className="flex " onSubmit={handleFormSubmit}>
+      <label className="font-semibold text-2xl">
         Name:
-        <StyledInput
+        <input
+          className="input input-bordered rounded-xl max-w-xs mr-3 ml-3"
           type="text"
           name="name"
           value={name}
@@ -27,10 +31,11 @@ export const Form = ({ handleAddContact }) => {
           required
           onChange={e => setName(e.target.value)}
         />
-      </StyledLabel>
-      <StyledLabel>
+      </label>
+      <label className="font-semibold text-2xl">
         Tel:
-        <StyledInput
+        <input
+          className="input input-bordered rounded-xl max-w-xs mr-3 ml-3"
           type="tel"
           name="number"
           placeholder="Enter your number"
@@ -40,8 +45,8 @@ export const Form = ({ handleAddContact }) => {
           value={number}
           onChange={e => setNumber(e.target.value)}
         />
-      </StyledLabel>
-      <StyledButton type="submit">Add contact</StyledButton>
+      </label>
+      <ButtonLoad isLoading={isLoading} title="Add Contact" />
     </form>
   );
 };

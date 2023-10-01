@@ -1,48 +1,51 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import UserMenu from '../UserMenu/UserMenu';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
-import {
-  HomeList,
-  ListLinks,
-  StyledHeader,
-  StyledLoginBtn,
-  StyledNavLink,
-  StyledNavList,
-} from './LayoutStyled';
 
 const Layout = () => {
   const isLogin = useSelector(selectIsLoggedIn);
   return (
     <div>
-      <StyledHeader>
-        <StyledNavList>
-          <HomeList>
+      <header className="bg-red-100 p-4">
+        <ul className="flex items-center justify-between gap-10 p-3">
+          <ul className="flex gap-10 ">
             <li>
-              <StyledNavLink to="/">Home</StyledNavLink>
+              <NavLink className="font-bold hover:text-blue-500" to="/">
+                Home
+              </NavLink>
             </li>
             <li>
-              <StyledNavLink to="/contacts">Contacts</StyledNavLink>
+              <NavLink className="font-bold hover:text-blue-500" to="/contacts">
+                Contacts
+              </NavLink>
             </li>
-          </HomeList>
+          </ul>
           {!isLogin && (
-            <ListLinks>
+            <ul className="flex gap-10 items-center">
               <li>
-                <StyledNavLink to="/login">Login</StyledNavLink>
+                <NavLink className="font-bold hover:text-blue-500" to="/login">
+                  Login
+                </NavLink>
               </li>
               <li>
-                <StyledLoginBtn to="/register">Sign up</StyledLoginBtn>
+                <button
+                  className="p-3 font-semibold rounded-xl text-l text-white bg-blue-500 hover:bg-blue-700  "
+                  to="/register"
+                >
+                  Sign up
+                </button>
               </li>
-            </ListLinks>
+            </ul>
           )}
           {isLogin && (
             <div>
               <UserMenu />
             </div>
           )}
-        </StyledNavList>
-      </StyledHeader>
+        </ul>
+      </header>
       <hr />
       <div>
         <Outlet />

@@ -2,7 +2,6 @@ import React from 'react';
 import PhoneBook from 'components/PhoneBook/PhoneBook';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
 import { useSelector } from 'react-redux';
-import Login from 'pages/Login/Login';
 import { Link } from 'react-router-dom';
 
 const Contacts = () => {
@@ -10,7 +9,9 @@ const Contacts = () => {
   return (
     <div>
       {!isLoggedIn ? (
-        <h3>If you want to see PhoneBook, you have to login</h3>
+        <h3>
+          If you want to see PhoneBook, you have to login <Link to="/login" />
+        </h3>
       ) : (
         <PhoneBook />
       )}

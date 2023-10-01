@@ -10,7 +10,6 @@ import {
   fetchContactsThunk,
 } from 'redux/phonebook/operations';
 import { useEffect } from 'react';
-import { StyledSubTitle, StyledTitle, StyledWrapper } from './PhoneBookStyled';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -50,23 +49,19 @@ const App = () => {
   };
 
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
-      <StyledWrapper>
-        <StyledTitle>PhoneBook</StyledTitle>
+    <div className="h-14 bg-gradient-to-r from-violet-500 to-fuchsia-500 min-h-screen flex justify-center items-center">
+      <div className="rounded-xl p-6 bg-red-100 ">
+        <h1 className="text-4xl items-center justify-center flex mb-4 font-bold">
+          PhoneBook
+        </h1>
         <Form handleAddContact={handleAddContact} />
-        <StyledSubTitle>Contacts</StyledSubTitle>
+        <hr className="h-px my-8  bg-black border-0 rounded  dark:bg-gray-700" />
+        <h2 className="text-4xl items-center justify-center flex mb-4 font-bold">
+          Contacts
+        </h2>
         <Filter inputFilterData={handleChangeFilter} />
         <ContactList contacts={filterContacts()} />
-      </StyledWrapper>
+      </div>
     </div>
   );
 };

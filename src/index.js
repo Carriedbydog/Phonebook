@@ -17,9 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <BrowserRouter basename="/goit-react-hw-08-phonebook">
         <PersistGate loading={null} persistor={persistor}>
           <App />
+          <Global />
+          <Toastify />
         </PersistGate>
-        <Toastify />
-        <Global />
       </BrowserRouter>
     </Provider>
   </>

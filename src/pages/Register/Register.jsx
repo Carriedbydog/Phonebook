@@ -1,14 +1,17 @@
+import ButtonLoad from 'components/ButtonLoad/ButtonLoad';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { registerThunk } from 'redux/auth/operations';
+import { selectLoading } from 'redux/auth/selectors';
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoading = useSelector(selectLoading);
   const submit = data => {
     dispatch(registerThunk(data))
       .unwrap()
@@ -21,21 +24,40 @@ const Register = () => {
       });
   };
   return (
-    <section>
-      <form onSubmit={handleSubmit(submit)}>
-        <label>
+    <section className="grid h-14 bg-gradient-to-r from-violet-500 to-fuchsia-500 min-h-screen justify-center items-center">
+      <form
+        className="grid gap-2 bg-white  px-4 py-4 shadow-2xl rounded-lg"
+        onSubmit={handleSubmit(submit)}
+      >
+        <h1 className="text-center text-xl font-bold">Sign up</h1>
+        <label className="grid gap-3">
           Name
-          <input {...register('name')} />
+          <input
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered w-full max-w-xs rounded-lg"
+            {...register('name')}
+          />
         </label>
-        <label>
+        <label className="grid gap-3">
           Email
-          <input {...register('email')} />
+          <input
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered w-full max-w-xs rounded-lg"
+            {...register('email')}
+          />
         </label>
-        <label>
+        <label className="grid gap-3">
           Password
-          <input {...register('password')} />
+          <input
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered w-full max-w-xs rounded-lg"
+            {...register('password')}
+          />
         </label>
-        <button>Sign Up</button>
+        <ButtonLoad isLoading={isLoading} title="Sign up" />
       </form>
     </section>
   );
