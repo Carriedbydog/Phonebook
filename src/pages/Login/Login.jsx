@@ -37,15 +37,6 @@ const Login = () => {
       >
         <h1 className="text-center text-xl font-bold">Login now!</h1>
         <label className="grid gap-3">
-          Name
-          <input
-            type="text"
-            placeholder="Type here"
-            className="input input-bordered w-full max-w-xs rounded-lg"
-            {...register('name')}
-          />
-        </label>
-        <label className="grid gap-3">
           Email
           <input
             type="text"

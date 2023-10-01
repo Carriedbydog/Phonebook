@@ -11,7 +11,7 @@ import {
 } from 'redux/phonebook/operations';
 import { useEffect } from 'react';
 
-const App = () => {
+const PhoneBook = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
@@ -66,4 +66,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default PhoneBook;

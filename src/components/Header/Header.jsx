@@ -21,11 +21,13 @@ export const Header = () => {
             Home
           </NavLink>
         </li>
-        <li>
-          <NavLink className="font-bold hover:text-blue-500" to="/contacts">
-            Contacts
-          </NavLink>
-        </li>
+        {isLogin && (
+          <li>
+            <NavLink className="font-bold hover:text-blue-500" to="/contacts">
+              Contacts
+            </NavLink>
+          </li>
+        )}
       </ul>
       <nav>
         <section className="MOBILE-MENU flex lg:hidden overflow-hidden">
