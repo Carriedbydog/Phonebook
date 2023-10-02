@@ -9,7 +9,7 @@ const Layout = () => {
   const isLogin = useSelector(selectIsLoggedIn);
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Header isLogin={isLogin} />
       <hr />
       <div>

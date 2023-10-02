@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutThunk } from 'redux/auth/operations';
 import { selectUser } from 'redux/auth/selectors';
 
-const UserMenu = () => {
+const UserMenu = ({ closeModal }) => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logoutThunk());
+    closeModal();
   };
   return (
     <div className="hidden lg:flex justify-center items-center gap-3 px-4">

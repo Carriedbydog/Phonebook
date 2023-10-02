@@ -1,15 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { selectIsLoggedIn } from 'redux/auth/selectors';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { selectIsLoggedIn, selectUser } from 'redux/auth/selectors';
 import UserMenu from '../UserMenu/UserMenu';
 import { logoutThunk } from 'redux/auth/operations';
 
 export const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const user = useSelector(selectUser);
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate('/login');
+    setIsNavOpen(false);
+  };
+  const handleRegister = () => {
+    navigate('/register');
+    setIsNavOpen(false);
+  };
+  useEffect(() => {
+    isNavOpen
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'auto');
+  }, [isNavOpen]);
+
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logoutThunk());
+    setIsNavOpen(false);
   };
   const isLogin = useSelector(selectIsLoggedIn);
 
@@ -29,6 +46,7 @@ export const Header = () => {
           </li>
         )}
       </ul>
+
       <nav>
         <section className="MOBILE-MENU flex lg:hidden overflow-hidden">
           <div
@@ -62,24 +80,15 @@ export const Header = () => {
               {!isLogin ? (
                 <>
                   <li className="border-b border-gray-400 my-8 uppercase">
-                    <NavLink
-                      onClick={() => setIsNavOpen(prev => !prev)}
-                      to="/login"
-                    >
-                      Login
-                    </NavLink>
+                    <button onClick={handleLogin}>Login</button>
                   </li>
                   <li className="border-b border-gray-400 my-8 uppercase">
-                    <NavLink
-                      onClick={() => setIsNavOpen(prev => !prev)}
-                      to="/register"
-                    >
-                      Sign up
-                    </NavLink>
+                    <button onClick={handleRegister}>Sign up</button>
                   </li>
                 </>
               ) : (
                 <div>
+                  <p className="text-2xl my-4">{user.email}</p>
                   <button
                     className="p-4 font-semibold rounded-xl text-white bg-blue-500 hover:bg-blue-700"
                     onClick={handleLogout}
@@ -95,9 +104,13 @@ export const Header = () => {
         {!isLogin ? (
           <ul className="items-center DESKTOP-MENU hidden space-x-8 lg:flex px-4">
             <li>
-              <NavLink className="font-bold hover:text-blue-500" to="/login">
+              <button
+                onClick={handleLogin}
+                className="font-bold hover:text-blue-500"
+                to="/login"
+              >
                 Login
-              </NavLink>
+              </button>
             </li>
             <li>
               <NavLink to="/register">
@@ -112,7 +125,7 @@ export const Header = () => {
           </ul>
         ) : (
           <div>
-            <UserMenu />
+            <UserMenu closeModal={() => setIsNavOpen(false)} />
           </div>
         )}
       </nav>
@@ -122,18 +135,14 @@ export const Header = () => {
       }
       .showMenuNav {
         display: block;
-        position: absolute;
-        width: 100%;
-        height: 100vh;
-        top: 0;
-        left: 0;
+        position: fixed;
+       inset:0;
         background: linear-gradient(lightblue,purple);
         z-index: 10;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        overflow: hidden;
       }
     `}</style>
     </div>
