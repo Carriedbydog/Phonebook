@@ -100,12 +100,14 @@ export const Header = () => {
               </NavLink>
             </li>
             <li>
-              <button
-                className="p-3 font-semibold rounded-xl text-l text-white bg-blue-500 hover:bg-blue-700  "
-                to="/register"
-              >
-                Sign up
-              </button>
+              <NavLink to="/register">
+                <button
+                  className="p-3 font-semibold rounded-xl text-l text-white bg-blue-500 hover:bg-blue-700  "
+                  to="/register"
+                >
+                  Sign up
+                </button>
+              </NavLink>
             </li>
           </ul>
         ) : (

@@ -8,8 +8,8 @@ import {
 
 const initialState = {
   user: {
-    name: '',
     email: '',
+    password: '',
   },
   token: '',
   isLoggedIn: false,
@@ -33,8 +33,8 @@ export const slice = createSlice({
       .addCase(refreshThunk.fulfilled, (state, { payload }) => {
         state.isRefresh = false;
         state.isLoggedIn = true;
-        state.user = payload.user;
-        state.token = payload.token;
+        state.user.name = payload.name;
+        state.user.email = payload.email;
       })
       .addMatcher(
         isAnyOf(loginThunk.pending, registerThunk.pending, state => {

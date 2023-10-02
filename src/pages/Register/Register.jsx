@@ -16,7 +16,7 @@ const Register = () => {
     dispatch(registerThunk(data))
       .unwrap()
       .then(res => {
-        toast.success(`Welcome ${res.user.name}`);
+        toast.success(`Welcome ${res.user.email}`);
         navigate('/contacts');
       })
       .catch(error => {
