@@ -2,15 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContactThunk } from 'redux/phonebook/operations';
-import { selectError, selectLoading } from 'redux/selectors';
+import { selectContacts, selectError, selectLoading } from 'redux/selectors';
+import { useModal } from 'hooks/useModal';
+import { Modal } from 'components/Modal/Modal';
+import { Pencil } from 'lucide-react';
 
-export const ContactList = ({ contacts }) => {
+export const ContactList = () => {
+  const contacts = useSelector(selectContacts);
+  const { open, close, isModalOpen, content } = useModal();
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const handleContactDelete = id => {
     dispatch(deleteContactThunk(id));
   };
+
   return (
     <div>
       {loading && <h1>Loading...</h1>}
@@ -25,15 +31,24 @@ export const ContactList = ({ contacts }) => {
             {contact.name}
             <span className="text-xl text-gray-400">Number:</span>
             {contact.number}
-            <button
-              className="p-2 font-semibold rounded-xl text-xl text-white bg-red-400 hover:bg-red-600 border-2 "
-              onClick={() => handleContactDelete(contact.id)}
-              type="button"
-            >
-              Delete
-            </button>
+            <div className="flex justify-center items-center gap-1">
+              <button
+                className="p-2 font-semibold rounded-xl text-xl text-white bg-yellow-400 hover:bg-yellow-500 "
+                onClick={() => open(contact)}
+              >
+                <Pencil color="#050505" />
+              </button>
+              <button
+                className="p-2 font-semibold rounded-xl text-xl text-white bg-red-400 hover:bg-red-600 border-2 "
+                onClick={() => handleContactDelete(contact.id)}
+                type="button"
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
+        {isModalOpen && <Modal close={close} contact={content} />}
       </ol>
     </div>
   );
