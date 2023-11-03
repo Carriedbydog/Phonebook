@@ -3,5 +3,5 @@
 
 During the project's development, the following libraries were utilized:
 
-For styling: Toastify, Tailwind, daisyUI, Lucide-react, React-icons.
-For database operations: Axios, Redux Toolkit.
+1. For styling: Toastify, Tailwind, daisyUI, Lucide-react, React-icons.
+2. For database operations: Axios, Redux Toolkit.
