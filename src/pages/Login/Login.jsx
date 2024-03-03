@@ -7,6 +7,7 @@ import { loginThunk } from 'redux/auth/operations';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
 import ButtonLoad from 'components/ButtonLoad/ButtonLoad';
 import { selectLoading } from 'redux/selectors';
+import GoogleButton from 'react-google-button';
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -63,6 +64,18 @@ const Login = () => {
           </Link>
         </span>
       </form>
+      <GoogleButton
+        label="Sign in with Google"
+        onClick={() =>
+          (window.location.href = 'http://localhost:3020/api/auth/google')
+        }
+      />
+      <GoogleButton
+        label="Sign in with Facebook"
+        onClick={() =>
+          (window.location.href = 'http://localhost:3020/api/auth/facebook')
+        }
+      />
     </section>
   );
 };
