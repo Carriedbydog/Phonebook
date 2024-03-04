@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export const ResetPassword = () => {
   const [password, setPassword] = useState('');
-  const { token } = useParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const resetToken = queryParams.get('resetToken');
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await axios.post(
-      `http://localhost:3020/api/users/reset-password/${token}`,
+    await axios.patch(
+      `http://localhost:3020/api/users/reset-password?resetToken=${resetToken}`,
       { password }
     );
   };
