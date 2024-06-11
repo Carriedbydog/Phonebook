@@ -73,13 +73,15 @@ const Login = () => {
           <GoogleButton
             label="Sign in with Google"
             onClick={() =>
-              (window.location.href = 'http://localhost:3020/api/auth/google')
+              (window.location.href =
+                'https://pulse-run-api.onrender.com/api/auth/google')
             }
           />
           <GoogleButton
             label="Sign in with Facebook"
             onClick={() =>
-              (window.location.href = 'http://localhost:3020/api/auth/facebook')
+              (window.location.href =
+                'https://pulse-run-api.onrender.com/api/auth/facebook')
             }
           />
         </div>
