@@ -1,4 +1,6 @@
 import { PrivateRoute } from 'Routes/PrivateRoute';
+import { ForgotPassword } from 'components/ForgotPassword/ForgotPassword';
+import { ResetPassword } from 'components/ForgotPassword/ResetPassword';
 import Layout from 'components/Layout/Layout';
 import { Spinner } from 'components/Spinner/Spinner';
 import Contacts from 'pages/Contacts/Contacts';
@@ -38,6 +40,8 @@ const App = () => {
 
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

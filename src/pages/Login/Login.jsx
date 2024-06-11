@@ -63,6 +63,28 @@ const Login = () => {
             create it
           </Link>
         </span>
+        <span>
+          Forgot your password?{' '}
+          <Link to="/forgot-password" className="underline text-teal-500">
+            reset it
+          </Link>
+        </span>
+        <div className="">
+          <GoogleButton
+            label="Sign in with Google"
+            onClick={() =>
+              (window.location.href =
+                'https://pulse-run-api.onrender.com/api/auth/google')
+            }
+          />
+          <GoogleButton
+            label="Sign in with Facebook"
+            onClick={() =>
+              (window.location.href =
+                'https://pulse-run-api.onrender.com/api/auth/facebook')
+            }
+          />
+        </div>
       </form>
       <GoogleButton
         label="Sign in with Google"
